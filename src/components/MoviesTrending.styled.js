@@ -20,4 +20,9 @@ export const MovieName = styled.h3`
   margin-top: 8px;
   margin-bottom: 0;
   color: black;
+
+  :hover:not(.active),
+  :focus-visible:not(.active) {
+    color: blue;
+  }
 `;
