@@ -7,7 +7,7 @@ export const MoviesTrending = ({ trandingMovies }) => {
       <h2>Trending today</h2>
       {trandingMovies.map(movie => (
         <li key={movie.id}>
-          <Link to={`movies/id=${movie.id}`}>
+          <Link to={`movies/${movie.id}`}>
             <CardWrapper>
               <MovieName>{movie.original_title}</MovieName>
             </CardWrapper>
