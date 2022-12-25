@@ -21,6 +21,10 @@ export const Home = () => {
     //    .finally(() => setLoading(false));
   }, []);
 
+  if (error) {
+    console.log(error);
+  }
+
   return (
     <main>
       <MoviesTrending trandingMovies={trandingMovies} />

@@ -9,6 +9,11 @@ export const MoviesTrending = ({ trandingMovies }) => {
         <li key={movie.id}>
           <Link to={`movies/${movie.id}`}>
             <CardWrapper>
+              <img
+                src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+                alt={movie.title}
+                width="100"
+              />
               <MovieName>{movie.original_title}</MovieName>
             </CardWrapper>
           </Link>

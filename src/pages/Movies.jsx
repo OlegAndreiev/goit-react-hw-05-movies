@@ -46,6 +46,10 @@ export const Movies = () => {
     setSearchedMovies('');
   };
 
+  if (error) {
+    console.log(error);
+  }
+
   return (
     <>
       <Form onSubmit={handleSubmit}>
