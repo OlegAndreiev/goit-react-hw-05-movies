@@ -1,4 +1,11 @@
+import { useNavigate } from 'react-router-dom';
+
 export const NotFound = () => {
+  const navigate = useNavigate();
+  setTimeout(() => {
+    navigate('/');
+  }, 3000);
+
   return (
     <div
       style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}
