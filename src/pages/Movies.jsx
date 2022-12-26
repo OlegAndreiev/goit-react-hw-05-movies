@@ -1,12 +1,10 @@
-import React, { useEffect, useState } from 'react';
-
+import React, { Suspense, useEffect, useState } from 'react';
 import { Button, Form, Input } from './Movies.styled';
 import { BsSearch } from 'react-icons/bs';
-
 import { FindedMovies } from 'components/FindedMovies';
-import { useSearchParams, useLocation, Link, Navigate } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 
-export const Movies = () => {
+const Movies = () => {
   const [searchedMovies, setSearchedMovies] = useState(() => '');
   const [findedMovies, setFindedMovies] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
@@ -14,8 +12,6 @@ export const Movies = () => {
   const BASE_URL = 'https://api.themoviedb.org/3';
   const API_KEY = '00f2cafab9ed8b61ede4a54c54838e2c';
   const searchParam = searchParams.get('search') ?? '';
-  const location = useLocation();
-  console.log(location);
 
   const handleInputChangeName = event => {
     const { value } = event.currentTarget;
@@ -76,23 +72,27 @@ export const Movies = () => {
   }, []);
 
   return (
-    <>
-      <Form onSubmit={handleSubmit}>
-        <Input
-          type="text"
-          autoComplete="off"
-          autoFocus
-          placeholder="Search movies"
-          value={searchParam}
-          onChange={handleInputChangeName}
-        ></Input>
-        <Button type="submit">
-          <BsSearch />
-        </Button>
-      </Form>
-      {findedMovies.length !== 0 && (
-        <FindedMovies findedMovies={findedMovies} />
-      )}
-    </>
+    <div>
+      <Suspense fallback={null}>
+        <Form onSubmit={handleSubmit}>
+          <Input
+            type="text"
+            autoComplete="off"
+            autoFocus
+            placeholder="Search movies"
+            value={searchParam}
+            onChange={handleInputChangeName}
+          ></Input>
+          <Button type="submit">
+            <BsSearch />
+          </Button>
+        </Form>
+        {findedMovies.length !== 0 && (
+          <FindedMovies findedMovies={findedMovies} />
+        )}
+      </Suspense>
+    </div>
   );
 };
+
+export default Movies;

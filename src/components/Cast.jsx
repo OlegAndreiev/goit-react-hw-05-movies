@@ -1,7 +1,7 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { useParams } from 'react-router-dom';
 
-export const Cast = () => {
+const Cast = () => {
   const { movieId } = useParams();
   const [cast, setCast] = useState(null);
   const [error, setError] = useState(null);
@@ -33,23 +33,27 @@ export const Cast = () => {
 
   return (
     <div>
-      {cast.length !== 0 ? (
-        <ul>
-          {cast.cast.map(cast => (
-            <li key={cast.id}>
-              <img
-                src={`https://image.tmdb.org/t/p/w500${cast.profile_path}`}
-                alt={cast.name}
-                width="100"
-              />
-              <p>{cast.name}</p>
-              <p>Character: {cast.character}</p>
-            </li>
-          ))}
-        </ul>
-      ) : (
-        ' We don`t have any casts for this movie'
-      )}
+      <Suspense fallback={null}>
+        {cast.length !== 0 ? (
+          <ul>
+            {cast.cast.map(cast => (
+              <li key={cast.id}>
+                <img
+                  src={`https://image.tmdb.org/t/p/w500${cast.profile_path}`}
+                  alt={cast.name}
+                  width="100"
+                />
+                <p>{cast.name}</p>
+                <p>Character: {cast.character}</p>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          ' We don`t have any casts for this movie'
+        )}
+      </Suspense>
     </div>
   );
 };
+
+export default Cast;

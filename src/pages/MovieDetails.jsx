@@ -1,8 +1,8 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { Link, Outlet, useParams, useLocation } from 'react-router-dom';
 import { TiArrowBack } from 'react-icons/ti';
 
-export const MovieDetails = () => {
+const MovieDetails = () => {
   const { movieId } = useParams();
   const [movie, setMovie] = useState(null);
   const [error, setError] = useState(null);
@@ -36,37 +36,43 @@ export const MovieDetails = () => {
 
   return (
     <>
-      <section>
-        <Link to={backLinkHref}>
-          <TiArrowBack />
-          Go back
-        </Link>
-        <img
-          src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-          alt={movie.title}
-          width="100"
-        />
-        <h2>{movie.title}</h2>
-        <p>Popularity: {movie.popularity}</p>
-        <h3>Overview</h3>
-        <p>{movie.overview}</p>
-        <h3>Genres</h3>
-        {movie.genres.map(movie => (
-          <p key={movie.name}>{movie.name}</p>
-        ))}
-      </section>
-      <section>
-        Additional information
-        <ul>
-          <li>
-            <Link to="cast">Cast</Link>
-          </li>
-          <li>
-            <Link to="reviews">Reviews</Link>
-          </li>
-        </ul>
-        <Outlet />
-      </section>
+      <Suspense fallback={null}>
+        <section>
+          <Link to={backLinkHref}>
+            <TiArrowBack />
+            Go back
+          </Link>
+          <img
+            src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+            alt={movie.title}
+            width="100"
+          />
+          <h2>{movie.title}</h2>
+          <p>Popularity: {movie.popularity}</p>
+          <h3>Overview</h3>
+          <p>{movie.overview}</p>
+          <h3>Genres</h3>
+          {movie.genres.map(movie => (
+            <p key={movie.name}>{movie.name}</p>
+          ))}
+        </section>
+        <section>
+          Additional information
+          <ul>
+            <li>
+              <Link to="cast">Cast</Link>
+            </li>
+            <li>
+              <Link to="reviews">Reviews</Link>
+            </li>
+          </ul>
+          <Suspense fallback={null}>
+            <Outlet />
+          </Suspense>
+        </section>
+      </Suspense>
     </>
   );
 };
+
+export default MovieDetails;

@@ -1,7 +1,7 @@
 import { MoviesTrending } from 'components/MoviesTrending';
-import { useEffect, useState } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 
-export const Home = () => {
+const Home = () => {
   const BASE_URL = 'https://api.themoviedb.org/3';
   const API_KEY = '00f2cafab9ed8b61ede4a54c54838e2c';
   const [trandingMovies, setTrandingMovies] = useState([]);
@@ -18,7 +18,6 @@ export const Home = () => {
       })
       .catch(error => setError({ error }))
       .then(data => setTrandingMovies(data.results));
-    //    .finally(() => setLoading(false));
   }, []);
 
   if (error) {
@@ -27,7 +26,11 @@ export const Home = () => {
 
   return (
     <main>
-      <MoviesTrending trandingMovies={trandingMovies} />
+      <Suspense fallback={null}>
+        <MoviesTrending trandingMovies={trandingMovies} />
+      </Suspense>
     </main>
   );
 };
+
+export default Home;

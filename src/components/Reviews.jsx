@@ -1,7 +1,7 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { useParams } from 'react-router-dom';
 
-export const Reviews = () => {
+const Reviews = () => {
   const { movieId } = useParams();
   const [reviews, setReviews] = useState(null);
   const [error, setError] = useState(null);
@@ -33,20 +33,24 @@ export const Reviews = () => {
 
   return (
     <div>
-      {reviews.length !== 0 ? (
-        <ul>
-          {reviews.map(review => (
-            <div key={review.id}>
-              <li style={{ fontSize: 16, fontWeight: 700 }}>
-                Author: {review.author}
-              </li>
-              <p>{review.content}</p>
-            </div>
-          ))}
-        </ul>
-      ) : (
-        'We don`t have any reviews for this movie'
-      )}
+      <Suspense fallback={null}>
+        {reviews.length !== 0 ? (
+          <ul>
+            {reviews.map(review => (
+              <div key={review.id}>
+                <li style={{ fontSize: 16, fontWeight: 700 }}>
+                  Author: {review.author}
+                </li>
+                <p>{review.content}</p>
+              </div>
+            ))}
+          </ul>
+        ) : (
+          'We don`t have any reviews for this movie'
+        )}
+      </Suspense>
     </div>
   );
 };
+
+export default Reviews;
