@@ -4,17 +4,21 @@ import { Button, Form, Input } from './Movies.styled';
 import { BsSearch } from 'react-icons/bs';
 
 import { FindedMovies } from 'components/FindedMovies';
+import { useSearchParams } from 'react-router-dom';
 
 export const Movies = () => {
   const [searchedMovies, setSearchedMovies] = useState(() => '');
   const [findedMovies, setFindedMovies] = useState([]);
+  const [searchParams, setSearchParams] = useSearchParams();
   const [error, setError] = useState(null);
   const BASE_URL = 'https://api.themoviedb.org/3';
   const API_KEY = '00f2cafab9ed8b61ede4a54c54838e2c';
+  const searchParam = searchParams.get('search') ?? '';
 
   const handleInputChangeName = event => {
     const { value } = event.currentTarget;
     setSearchedMovies(value.trim().toLowerCase());
+    setSearchParams(value !== '' ? { search: value } : {});
   };
 
   const handleSubmit = event => {
@@ -58,6 +62,7 @@ export const Movies = () => {
           autoComplete="off"
           autoFocus
           placeholder="Search movies"
+          value={searchParam}
           onChange={handleInputChangeName}
         ></Input>
         <Button type="submit">

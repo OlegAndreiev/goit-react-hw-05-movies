@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
-import { Link, Outlet, useParams } from 'react-router-dom';
+import { Link, Outlet, useParams, useLocation } from 'react-router-dom';
+import { TiArrowBack } from 'react-icons/ti';
 
 export const MovieDetails = () => {
   const { movieId } = useParams();
@@ -7,6 +8,7 @@ export const MovieDetails = () => {
   const [error, setError] = useState(null);
   const BASE_URL = 'https://api.themoviedb.org/3';
   const API_KEY = '00f2cafab9ed8b61ede4a54c54838e2c';
+  const location = useLocation();
 
   useEffect(() => {
     fetch(`${BASE_URL}/movie/${movieId}?api_key=${API_KEY}&language=en-US`)
@@ -29,10 +31,15 @@ export const MovieDetails = () => {
     console.log(error);
   }
 
+  console.log(location);
+
   return (
     <>
       <section>
-        <button type="button">Go back</button>
+        <Link to={location.state.from}>
+          <TiArrowBack />
+          Go back
+        </Link>
         <img
           src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
           alt={movie.title}
