@@ -1,6 +1,7 @@
 import { useState, useEffect, Suspense } from 'react';
 import { Link, Outlet, useParams, useLocation } from 'react-router-dom';
 import { TiArrowBack } from 'react-icons/ti';
+import { GoBack, MovieInfo, Poster, Section } from './MovieDetails.styled';
 
 const MovieDetails = () => {
   const { movieId } = useParams();
@@ -37,26 +38,45 @@ const MovieDetails = () => {
   return (
     <>
       <Suspense fallback={null}>
-        <section>
-          <Link to={backLinkHref}>
-            <TiArrowBack />
-            Go back
-          </Link>
-          <img
-            src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-            alt={movie.title}
-            width="100"
-          />
-          <h2>{movie.title}</h2>
-          <p>Popularity: {movie.popularity}</p>
-          <h3>Overview</h3>
-          <p>{movie.overview}</p>
-          <h3>Genres</h3>
-          {movie.genres.map(movie => (
-            <p key={movie.name}>{movie.name}</p>
-          ))}
-        </section>
-        <section>
+        <Section>
+          <GoBack>
+            <Link
+              to={backLinkHref}
+              style={{
+                display: 'flex',
+                gap: '5px',
+                color: 'black',
+                textDecoration: 'none',
+                width: '100px',
+                backgroundColor: 'lavender',
+                border: '1px solid black',
+              }}
+            >
+              <TiArrowBack />
+              Go back
+            </Link>
+          </GoBack>
+          <MovieInfo>
+            <div>
+              <Poster
+                src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+                alt={movie.title}
+                width="100"
+              />
+            </div>
+            <div>
+              <h2>{movie.title}</h2>
+              <p>Popularity: {movie.popularity}</p>
+              <h3>Overview</h3>
+              <p>{movie.overview}</p>
+              <h3>Genres</h3>
+              {movie.genres.map(movie => (
+                <p key={movie.name}>{movie.name}</p>
+              ))}
+            </div>
+          </MovieInfo>
+        </Section>
+        <Section>
           Additional information
           <ul>
             <li>
@@ -69,7 +89,7 @@ const MovieDetails = () => {
           <Suspense fallback={null}>
             <Outlet />
           </Suspense>
-        </section>
+        </Section>
       </Suspense>
     </>
   );

@@ -1,3 +1,4 @@
+import { CastGallery } from 'pages/MovieDetails.styled';
 import { useState, useEffect, Suspense } from 'react';
 import { useParams } from 'react-router-dom';
 
@@ -35,11 +36,15 @@ const Cast = () => {
     <div>
       <Suspense fallback={null}>
         {cast.length !== 0 ? (
-          <ul>
+          <CastGallery>
             {cast.cast.map(cast => (
               <li key={cast.id}>
                 <img
-                  src={`https://image.tmdb.org/t/p/w500${cast.profile_path}`}
+                  src={
+                    cast.profile_path
+                      ? `https://image.tmdb.org/t/p/w500${cast.profile_path}`
+                      : `https://t4.ftcdn.net/jpg/00/07/88/43/360_F_7884307_RoHrYRl7DCnwfHX4tucmPuQ6eLtUB3kS.jpg`
+                  }
                   alt={cast.name}
                   width="100"
                 />
@@ -47,7 +52,7 @@ const Cast = () => {
                 <p>Character: {cast.character}</p>
               </li>
             ))}
-          </ul>
+          </CastGallery>
         ) : (
           ' We don`t have any casts for this movie'
         )}

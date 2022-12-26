@@ -5,7 +5,7 @@ const NotFound = () => {
   const navigate = useNavigate();
   setTimeout(() => {
     navigate('/');
-  }, 3000);
+  }, 2000);
 
   return (
     <div
