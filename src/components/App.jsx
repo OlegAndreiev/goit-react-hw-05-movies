@@ -12,7 +12,7 @@ const NotFound = lazy(() => import('../pages/NotFound'));
 export const App = () => {
   return (
     <Routes>
-      <Route path="/goit-react-hw-05-movies/" element={<SharedLayout />}>
+      <Route path="/" element={<SharedLayout />}>
         <Route index element={<Home />} />
         <Route path="movies" element={<Movies />} />
         <Route path="movies/:movieId" element={<MovieDetails />}>
