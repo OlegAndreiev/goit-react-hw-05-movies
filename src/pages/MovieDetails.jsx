@@ -1,13 +1,7 @@
 import { useState, useEffect, Suspense } from 'react';
 import { Link, Outlet, useParams, useLocation } from 'react-router-dom';
 import { TiArrowBack } from 'react-icons/ti';
-import {
-  GoBack,
-  MovieInfo,
-  Poster,
-  PosterContainer,
-  Section,
-} from './MovieDetails.styled';
+import { GoBack, MovieInfo, Poster, Section } from './MovieDetails.styled';
 
 const MovieDetails = () => {
   const { movieId } = useParams();
