@@ -33,8 +33,6 @@ const MovieDetails = () => {
     console.log(error);
   }
 
-  console.log(location);
-
   return (
     <>
       <Suspense fallback={null}>
