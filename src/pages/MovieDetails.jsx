@@ -10,7 +10,7 @@ const MovieDetails = () => {
   const BASE_URL = 'https://api.themoviedb.org/3';
   const API_KEY = '00f2cafab9ed8b61ede4a54c54838e2c';
   const location = useLocation();
-  const backLinkHref = location.state?.from ?? '/';
+  const backLinkHref = location.state?.from ?? '/goit-react-hw-05-movies/';
 
   useEffect(() => {
     fetch(`${BASE_URL}/movie/${movieId}?api_key=${API_KEY}&language=en-US`)

@@ -7,10 +7,10 @@ export const SharedLayout = () => {
     <Container>
       <Header>
         <nav>
-          <Link to="/" end>
+          <Link to="/goit-react-hw-05-movies/" end>
             Home
           </Link>
-          <Link to="/movies">Movies</Link>
+          <Link to="/goit-react-hw-05-movies/movies">Movies</Link>
         </nav>
       </Header>
       <Suspense fallback={null}>
