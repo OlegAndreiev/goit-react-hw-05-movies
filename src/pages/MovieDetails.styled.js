@@ -11,9 +11,10 @@ export const MovieInfo = styled.div`
 `;
 
 export const Poster = styled.img`
-  width: 100%;
-  height: 560px;
-  // object-fit: cover;
+  width: 400px;
+  // height: 560px;
+  object-fit: cover;
+  border: 1px solid black;
 `;
 
 export const GoBack = styled.div`
