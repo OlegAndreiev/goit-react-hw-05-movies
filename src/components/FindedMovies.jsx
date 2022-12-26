@@ -1,14 +1,19 @@
 import { useMemo, useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useSearchParams } from 'react-router-dom';
 import { MovieName, CardWrapper } from '../components/MoviesTrending.styled';
 
 export const FindedMovies = ({ findedMovies }) => {
-  const [moviesList, setMoviesList] = useState(findedMovies);
+  // const [moviesList, setMoviesList] = useState(findedMovies);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const search = searchParams.get('search') ?? '';
   const location = useLocation();
 
-  const visibleMovies = useMemo(() => {
-    return moviesList;
-  }, [moviesList]);
+  console.log(search);
+  console.log(searchParams);
+
+  // const visibleMovies = useMemo(() => {
+  //   return moviesList;
+  // }, [moviesList]);
 
   return (
     <ul>
