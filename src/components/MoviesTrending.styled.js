@@ -43,5 +43,5 @@ export const TrendingGallery = styled.ul`
 export const Poster = styled.img`
   width: 100%;
   height: 360px;
-  // object-fit: cover;
+  object-fit: cover;
 `;

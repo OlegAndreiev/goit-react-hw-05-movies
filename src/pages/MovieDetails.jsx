@@ -55,14 +55,12 @@ const MovieDetails = () => {
             </Link>
           </GoBack>
           <MovieInfo>
-            <div>
-              <Poster
-                src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-                alt={movie.title}
-                width="100"
-              />
-            </div>
-            <div>
+            <Poster
+              src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+              alt={movie.title}
+            />
+
+            <div style={{ maxWidth: 500 }}>
               <h2>{movie.title}</h2>
               <p>Popularity: {movie.popularity}</p>
               <h3>Overview</h3>
